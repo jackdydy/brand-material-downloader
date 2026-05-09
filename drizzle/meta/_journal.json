@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1778319553569,
+      "tag": "0000_mysterious_korg",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1778319641257,
+      "tag": "0001_goofy_black_crow",
+      "breakpoints": true
+    }
+  ]
+}
