@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: brand-material-downloader
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - VITE_APP_ID=${VITE_APP_ID}
+      - OAUTH_SERVER_URL=${OAUTH_SERVER_URL}
+      - VITE_OAUTH_PORTAL_URL=${VITE_OAUTH_PORTAL_URL}
+      - OWNER_OPEN_ID=${OWNER_OPEN_ID}
+      - OWNER_NAME=${OWNER_NAME}
+      - BUILT_IN_FORGE_API_URL=${BUILT_IN_FORGE_API_URL}
+      - BUILT_IN_FORGE_API_KEY=${BUILT_IN_FORGE_API_KEY}
+      - VITE_FRONTEND_FORGE_API_KEY=${VITE_FRONTEND_FORGE_API_KEY}
+      - VITE_FRONTEND_FORGE_API_URL=${VITE_FRONTEND_FORGE_API_URL}
+      - XILING_EMAIL=${XILING_EMAIL}
+      - XILING_PASSWORD=${XILING_PASSWORD}
+    # Playwright 需要的安全設置
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    shm_size: '2gb'
+    # 資源限制（適合 4GB RAM 伺服器）
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+        reservations:
+          memory: 1G
+
+  # Caddy 反向代理 + 自動 HTTPS
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  caddy_data:
+  caddy_config:

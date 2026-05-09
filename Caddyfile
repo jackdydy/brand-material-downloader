@@ -1,0 +1,18 @@
+# Caddy 配置文件 - 自動 HTTPS
+# 用您的域名替換 your-domain.com，或使用伺服器 IP
+
+# 如果您有域名（推薦）：
+# your-domain.com {
+#     reverse_proxy app:3000
+# }
+
+# 如果只用 IP 地址（無 HTTPS）：
+:80 {
+    reverse_proxy app:3000
+}
+
+# 部署後，您可以用域名替換上面的內容：
+# example.com {
+#     reverse_proxy app:3000
+#     # Caddy 會自動處理 SSL 證書
+# }

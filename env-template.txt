@@ -1,0 +1,30 @@
+# ===================================
+# 環境變量配置範本
+# ===================================
+# 將此檔案複製為 .env 並填入您的實際值
+# 在伺服器上執行: cp env-template.txt .env
+
+# 資料庫連接字串（必填）
+# 格式: mysql://用戶名:密碼@主機:端口/資料庫名
+DATABASE_URL=mysql://user:password@host:3306/dbname
+
+# JWT 加密密鑰（必填，隨機字符串）
+# 可以用以下命令生成: openssl rand -hex 32
+JWT_SECRET=please-generate-a-random-string-here
+
+# 小靈素材帳號（必填）
+XILING_EMAIL=your-xiling-email@example.com
+XILING_PASSWORD=your-xiling-password
+
+# Manus OAuth 配置（如果使用用戶系統）
+VITE_APP_ID=your-app-id
+OAUTH_SERVER_URL=https://api.manus.im
+VITE_OAUTH_PORTAL_URL=https://manus.im
+OWNER_OPEN_ID=your-owner-id
+OWNER_NAME=your-name
+
+# Manus Forge API（如果使用 LLM、儲存等功能）
+BUILT_IN_FORGE_API_URL=https://api.manus.im
+BUILT_IN_FORGE_API_KEY=your-api-key
+VITE_FRONTEND_FORGE_API_KEY=your-frontend-key
+VITE_FRONTEND_FORGE_API_URL=https://api.manus.im
